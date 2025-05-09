@@ -8,6 +8,7 @@ def hello():
     return jsonify({"message": "Hello, world!"}), 200
 
 
+# yessur
 @app.route("/users", methods=["GET"])
 def users():
     return jsonify({"badyss": "yoyoyo"}), 200
