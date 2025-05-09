@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
 
@@ -19,6 +20,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
+
+    - name: Verify Python version
+      run: python --version
 
     - name: Install dependencies
       run: |
@@ -31,15 +35,16 @@ jobs:
         pytest
 
     - name: Deploy to server
-      uses: appleboy/ssh-action@v0.1.10
+      uses: appleboy/ssh-action@v0.1.15  
       with:
         host: ${{ secrets.IP }}  
         username: ${{ secrets.USER }}  
-        key: ${{ secrets.KEY }}  
+        ssh-private-key: ${{ secrets.KEY }}
+        ssh-passphrase: ${{ secrets.PASSPHRASE }} 
         script: |
           docker stop flask-container || true
-          docker rm mycontainer || true
-        
+          docker rm flask-container || true
+          
           docker build -t flask-api .
           docker run -d --name flask-container -p 9900:9900 flask-api
           docker ps
