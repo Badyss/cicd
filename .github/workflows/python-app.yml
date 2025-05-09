@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to server
       uses: appleboy/ssh-action@v0.1.10
       with:
-        host: ${{ secrets.HOST }}  
+        host: ${{ secrets.IP }}  
         username: ${{ secrets.USER }}  
         key: ${{ secrets.KEY }}  
         script: |
