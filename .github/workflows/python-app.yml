@@ -35,8 +35,8 @@ jobs:
       with:
         host: ${{ secrets.IP }}  
         username: ${{ secrets.USER }}  
-        ssh-private-key: ${{ secrets.KEY }}  # clé privée dans secrets
-        ssh-passphrase: ${{ secrets.PASSPHRASE }}  # passphrase dans secrets
+        key: ${{ secrets.KEY }}  # clé privée dans secrets
+        passphrase: ${{ secrets.PASSPHRASE }}  # passphrase dans secrets
         script: |
           docker stop flask-container || true
           docker rm flask-container || true
